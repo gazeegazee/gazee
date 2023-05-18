@@ -5,11 +5,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="../resources/css/style.css" rel="stylesheet" />
+<link href="../../resources/css/style.css" rel="stylesheet" />
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <script type="text/javascript">
 	$(function() {
+		$('#faqList').click(function() {
+			location.href="../../customerService/faq/faqlist?page=1&mode=1";
+			
+		})
+		
+		
 		
 	})
 </script>
@@ -20,7 +26,7 @@
 		<div id="header">
 			<div class="headerContent">
 				<a href="gazeeMain.jsp"> <img
-					src="../resources/img/gazee_logo.png" id="logo">
+					src="../../resources/img/gazee_logo.png" id="logo">
 				</a>
 				<div id="search">
 					<input type="text" id="searchBar" placeholder="검색어를 입력하세요.">
@@ -61,13 +67,32 @@
 				<div id="customerHead">
 					<h1 style="color:#693FAA">고객센터</h1>
 				</div>
+					<div id="customerMenu1" style="margin-top: 30px">
+
+					<div class="FAQ">
+						<div style="display: flex; justify-content: space-between;">
+						
+							<h3 style="color: #693FAA"><a href="faqlist?page=1&mode=1" style="color: #693FAA !important;">자주 묻는 질문(FAQ)</a></h3>
+							<div
+								style="display: flex; justify-content: space-between; align-items: center; gap: 10px">
+							
+								<button id="faqList">목록으로</button>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
-			<div id=result></div>
+			<div id=result>
+			<label>제목</label><label> ${bag.faqTitle}</label> <hr>
+			<label>내용</label><label> ${bag.faqContent}</label>
+			
+			
+			</div>
 			<div id=faqButtom>
-				<div id=faqSearch>
+				<!-- div id=faqSearch>
 					<input type="text" size=40;>
 					<button id=reportSearchBtn>검색</button>
-				</div>
+				</div> -->
 			</div>
 		</div>
 	</div>

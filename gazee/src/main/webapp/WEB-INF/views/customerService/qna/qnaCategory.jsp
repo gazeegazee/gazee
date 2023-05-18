@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="../resources/css/style.css" rel="stylesheet" />
+<link href="../../resources/css/style.css" rel="stylesheet" />
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -18,13 +18,13 @@
 	$(function() {
 
 		$('.pages').click(function() {
-			$('#result').empty()
+			//$('#result').empty()
 			$.ajax({
-				url : "faqSearch", //views/bbsList2.jsp가 결과!
+				url : "qnaCategory", 
 				data : {
 					page : $(this).text(),
 					mode : 2,
-					search1 : '${searchValue}'
+					category1: '${categoryValue}'
 				},
 				success : function(result) { //결과가 담겨진 table부분코드
 					$('#result').html(result)
@@ -33,20 +33,23 @@
 					alert('실패.@@@')
 				}
 			}) //ajax
-		})//click
-		
-		$('#faqList').click(function() {
+		})
+
+		$('#qnaList').click(function() {
 			var category1=$('#category').val();
-			location.href="../customerService/faqCategory?page=1&mode=1&category1="+category1;
+			location.href="../../customerService/qna/qnaCategory?page=1&mode=1&category1="+category1;
 			
 		})//category
 		
-		$('#faqSearchBtn').click(function() {
-			var search1=$('#faqSearch').val();
-			location.href="../customerService/faqSearch?page=1&mode=1&search1="+search1;
+		$('#qnaSearchBtn').click(function() {
+			var search1=$('#qnaSearch').val();
+			location.href="../../customerService/qna/qnaSearch?page=1&mode=1&search1="+search1;
 			
-		})//search
+		})//category
+		
 	})
+	
+		
 </script>
 
 </head>
@@ -55,7 +58,7 @@
 		<div id="header">
 			<div class="headerContent">
 				<a href="gazeeMain.jsp"> <img
-					src="../resources/img/gazee_logo.png" id="logo">
+					src="../../resources/img/gazee_logo.png" id="logo">
 				</a>
 				<div id="search">
 					<input type="text" id="searchBar" placeholder="검색어를 입력하세요.">
@@ -100,7 +103,8 @@
 
 					<div class="FAQ">
 						<div style="display: flex; justify-content: space-between;">
-							<h3 ><a href="faqlist?page=1&mode=1" style="color: #693FAA !important">자주 묻는 질문(FAQ)</a></h3>
+						
+							<h3 style="color: #693FAA"><a href="qnaList?page=1&mode=1" style="color: #693FAA !important;">1:1 질문 게시판(QnA)</a></h3>
 							<div
 								style="display: flex; justify-content: space-between; align-items: center; gap: 10px">
 								<form method="get">
@@ -112,7 +116,8 @@
 										<option value="거래 관련">거래 관련</option>
 									</select>
 								</form>
-								<button id="faqList">목록</button>
+								<button id="qnaList">목록</button>
+								<button id="qnaWrite">글쓰기</button>
 							</div>
 						</div>
 					</div>
@@ -125,18 +130,21 @@
 					<tr>
 						<td class="top">번호</td>
 						<td class="top">제목</td>
+						<td class="top">작성자</td>
+						<td class="top">작성날짜</td>
 						<td class="top">조회수</td>
 					</tr>
-					<c:forEach items="${search}" var="bag">
+					<c:forEach items="${category}" var="bag">
 						<tr>
-							<td class="down">${bag.faqId}</td>
-							<td class="down"><a href="one?no=${bag.faqNo}">${bag.faqTitle}</a>
-							</td>
-							<td class="down">${bag.faqView}</td>
+							<td class="down">${bag.csId}</td>
+							<td class="down"><a href="qnaOne?no=${bag.csNo}">${bag.csTitle}</a></td>
+							<td class="down">${bag.csWriter}</td>
+							<td class="down">${bag.csDate}</td>
+							<td class="down">${bag.csView}</td>
 						</tr>
 					</c:forEach>
 				</table>
-
+				
 			</div>
 			<div id="paging" style="margin-top: 10px; text-align: center">
 				<%
@@ -149,11 +157,11 @@
 					}
 				%>
 			</div>
-			<div id=faqButtom style="margin-top: 10px; text-align: center">
+			<div id="qnaButtom" style="margin-top: 10px; text-align: center">
 
 				<div id="search" style="margin-top: 10px">
-					<input id="faqSearch" type="text" size=40;>
-					<button id=faqSearchBtn>검색</button>
+					<input id="qnaSearch" type="text" size=40;>
+					<button id="qnaSearchBtn">검색</button>
 				</div>
 			</div>
 		</div>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="qna">
+	
+	<insert id="create" parameterType="QnaVO">
+		insert into customer_service(cs_title, cs_content, cs_writer, cs_category, cs_secret) 
+		values (#{csTitle}, 
+				#{csContent},
+				#{csWriter},
+				#{csCategory},)
+				#{csSecret})
+	</insert>
+	
+	<delete id="del"  parameterType="QnaVO">
+		delete from customer_service where cs_no = #{csNO}
+	</delete>
+	
+	<update id="up"  parameterType="QnaVO">
+		update customer_service set csTitle= #{csTitle} where cs_no = #{csNo}
+	</update>
+	
+	<select id="one" parameterType="Integer" resultType="QnaVO">
+		select * from customer_service
+		where cs_no =#{csNo}
+	</select>
+	
+	<update id="viewUpdate" parameterType="Integer">
+		update customer_service set cs_view= cs_view + 1
+		where cs_no =#{csNo}
+	</update>
+	
+	<select id="all" resultType="QnaVO" parameterType="pageVO">
+		select * 
+		from (
+		select ROW_NUMBER() over(order by cs_no desc)as cs_id, cs.* 
+		from 
+		customer_service cs) cs2 
+		where cs2.cs_id between #{start} and #{end}
+	</select>
+	
+	<select id="category" parameterType="Map" resultType="QnaVO">
+		select * from (
+		select ROW_NUMBER() over(order by cs_no desc)as cs_id, cs.*
+		from customer_service cs 
+		where cs.cs_category=#{category1}) cs2
+		where cs2.cs_id between #{start} and #{end}
+	</select>
+	
+	<select id="count" resultType="Integer">
+		select count(*) from customer_service
+	</select>
+	
+	<select id="countCategory" parameterType="String" resultType="Integer">
+		select count(*) from customer_service
+		where cs_category=#{category1}
+	</select>
+	
+	<select id="countSearch" parameterType="String" resultType="Integer">
+		select count(*) from customer_service
+		where cs_title like concat('%', #{search1}, '%')
+	</select>
+	
+	<select id="list2" resultType="QnaVO" parameterType="PageVO">
+		select *
+		from (
+		select ROW_NUMBER() over(order by cs_no desc) as cs_id, cs.*
+		from customer_service cs) cs2
+		where cs2.cs_id between #{start} and #{end} 
+	</select>
+	
+	<select id="searchAll" resultType="QnaVO"  parameterType="Map">
+		select * from (
+		select ROW_NUMBER() over(order by cs_no desc) as cs_id, cs.*
+		from customer_service cs
+		where cs.cs_title like concat('%', #{search1}, '%')) cs2
+		where cs2.cs_id between #{start} and #{end}
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
