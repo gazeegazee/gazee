@@ -1,27 +1,27 @@
 package com.multi.gazee.productImage;
 
 public class ProductImageVO {
-	Long productImageId;
-	Long productId;
-	String productImageUrl;
-	
-	public Long getProductImageId() {
+	int productImageId;
+	int productId;
+	String productImageName;
+	int productImageOrder;
+	public int getProductImageId() {
 		return productImageId;
 	}
-	public void setProductImageId(Long productImageId) {
+	public void setProductImageId(int productImageId) {
 		this.productImageId = productImageId;
 	}
-	public Long getProductId() {
+	public int getProductId() {
 		return productId;
 	}
-	public void setProductId(Long productId) {
+	public void setProductId(int productId) {
 		this.productId = productId;
 	}
-	public String getProductImageUrl() {
-		return productImageUrl;
+	public String getProductImageName() {
+		return productImageName;
 	}
-	public void setProductImageUrl(String productImageUrl) {
-		this.productImageUrl = productImageUrl;
+	public void setProductImageName(String productImageName) {
+		this.productImageName = productImageName;
 	}
 	public int getProductImageOrder() {
 		return productImageOrder;
@@ -29,5 +29,11 @@ public class ProductImageVO {
 	public void setProductImageOrder(int productImageOrder) {
 		this.productImageOrder = productImageOrder;
 	}
-	int productImageOrder;
+	@Override
+	public String toString() {
+		return "ProductImageVO [productImageId=" + productImageId + ", productId=" + productId + ", productImageName="
+				+ productImageName + ", productImageOrder=" + productImageOrder + "]";
+	}
+
+	
 }

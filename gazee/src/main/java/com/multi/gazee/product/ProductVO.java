@@ -8,19 +8,13 @@ public class ProductVO {
 	String productName;
 	String productContent;
 	int price;
+	int dealDelivery;
 	int dealDirect;
 	float directAddressx;
 	float directAddressy;
-	int dealDelivery;
 	int productViews;
 	int temporary;
-	
-	public int getTemporary() {
-		return temporary;
-	}
-	public void setTemporary(int temporary) {
-		this.temporary = temporary;
-	}
+	String savedTime;
 	public int getProductId() {
 		return productId;
 	}
@@ -57,6 +51,12 @@ public class ProductVO {
 	public void setPrice(int price) {
 		this.price = price;
 	}
+	public int getDealDelivery() {
+		return dealDelivery;
+	}
+	public void setDealDelivery(int dealDelivery) {
+		this.dealDelivery = dealDelivery;
+	}
 	public int getDealDirect() {
 		return dealDirect;
 	}
@@ -75,27 +75,35 @@ public class ProductVO {
 	public void setDirectAddressy(float directAddressy) {
 		this.directAddressy = directAddressy;
 	}
-	public int getDealDelivery() {
-		return dealDelivery;
-	}
-	public void setDealDelivery(int dealDelivery) {
-		this.dealDelivery = dealDelivery;
-	}
-	
 	public int getProductViews() {
 		return productViews;
 	}
 	public void setProductViews(int productViews) {
 		this.productViews = productViews;
 	}
+	public int getTemporary() {
+		return temporary;
+	}
+	public void setTemporary(int temporary) {
+		this.temporary = temporary;
+	}
+	public String getSavedTime() {
+		return savedTime;
+	}
+	public void setSavedTime(String savedTime) {
+		this.savedTime = savedTime;
+	}
 	@Override
 	public String toString() {
 		return "ProductVO [productId=" + productId + ", memberId=" + memberId + ", category=" + category
 				+ ", productName=" + productName + ", productContent=" + productContent + ", price=" + price
-				+ ", dealDirect=" + dealDirect + ", directAddressx=" + directAddressx + ", directAddressy="
-				+ directAddressy + ", dealDelivery=" + dealDelivery + ", productViews=" + productViews + ", temporary="
-				+ temporary + "]";
+				+ ", dealDelivery=" + dealDelivery + ", dealDirect=" + dealDirect + ", directAddressx=" + directAddressx
+				+ ", directAddressy=" + directAddressy + ", productViews=" + productViews + ", temporary=" + temporary
+				+ ", savedTime=" + savedTime + "]";
 	}
+	
+	
+	
 	
 	
 }
