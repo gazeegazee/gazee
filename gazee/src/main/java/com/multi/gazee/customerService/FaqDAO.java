@@ -1,10 +1,12 @@
 package com.multi.gazee.customerService;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
 
 @Component
 public class FaqDAO {
@@ -35,12 +37,30 @@ public class FaqDAO {
 		return list;
 	}
 	
-	public List<FaqVO> category(String category1){
-		List<FaqVO> category = my.selectList("faq.category", category1);
+	
+	public List<FaqVO> category(HashMap<String, Object> map){
+		List<FaqVO> category = my.selectList("faq.category", map);
+		System.out.println(category.size());
 		return category;
 	}
 	
+	
+	public List<FaqVO> search(HashMap<String, Object> map){
+		List<FaqVO> search = my.selectList("faq.searchAll", map);
+		return search;
+	}
+	
+	
 	public int count() {
 		return my.selectOne("faq.count");
-	}   
+	}  
+	
+	public int countCategory(String category1) {
+		return my.selectOne("faq.countCategory", category1);
+	}  
+	
+	public int countSearch(String search1) {
+		return my.selectOne("faq.countSearch", search1);
+	}  
+	
 }

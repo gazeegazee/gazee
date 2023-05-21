@@ -8,6 +8,13 @@ public class FaqVO {
 	private int faqView;
 	private String faqCategory;
 	
+	
+	public int getFaqId() {
+		return faqId;
+	}
+	public void setFaqId(int faqId) {
+		this.faqId = faqId;
+	}
 	public int getFaqNo() {
 		return faqNo;
 	}
@@ -39,18 +46,15 @@ public class FaqVO {
 		this.faqCategory = faqCategory;
 	}
 	
-	
-	public int getFaqId() {
-		return faqId;
-	}
-	public void setFaqId(int faqId) {
-		this.faqId = faqId;
-	}
 	@Override
 	public String toString() {
-		return "faqVO [faqTitle=" + faqTitle + ", faqContent=" + faqContent + ", faqView=" + faqView + ", faqCategory="
-				+ faqCategory + "]";
+		return "FaqVO [faqId=" + faqId + ", faqNo=" + faqNo + ", faqTitle=" + faqTitle + ", faqContent=" + faqContent
+				+ ", faqView=" + faqView + ", faqCategory=" + faqCategory + "]";
 	}
+	
+	
+	
+	
 	
 	
 }

@@ -30,8 +30,8 @@ $('.pages').click(function() {
 	</tr>
 	<c:forEach items="${list}" var="bag">
 		<tr>
-			<td class="down">${bag.faqId}</td>
-			<td class="down"><a href="faqOne?no=${bag.faqNo}">${bag.faqTitle}</a>
+			<td class="down">${bag.faqNo}</td>
+			<td class="down"><a href="faqOne?id=${bag.faqId}">${bag.faqTitle}</a>
 			</td>
 			<td class="down">${bag.faqView}</td>
 		</tr>
