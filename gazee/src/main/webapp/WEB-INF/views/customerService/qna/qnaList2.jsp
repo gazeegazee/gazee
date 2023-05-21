@@ -32,8 +32,8 @@ $('.pages').click(function() {
 					</tr>
 					<c:forEach items="${list}" var="bag">
 						<tr>
-							<td class="down">${bag.csId}</td>
-							<td class="down"><a href="qnaOne?no=${bag.csNo}">${bag.csTitle}</a></td>
+							<td class="down">${bag.csNo}</td>
+							<td class="down"><a href="qnaOne?id=${bag.csId}">${bag.csTitle}</a></td>
 							<td class="down">${bag.csWriter}</td>
 							<td class="down">${bag.csDate}</td>
 							<td class="down">${bag.csView}</td>

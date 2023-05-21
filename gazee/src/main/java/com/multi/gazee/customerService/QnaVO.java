@@ -8,9 +8,10 @@ public class QnaVO {
 	private String csWriter;
 	private String csDate;
 	private int csView;
-	private String category;
+	private String csCategory;
 	private int csSecret;
 	private String csReply;
+	private int temporary;
 	
 	
 	public int getCsId() {
@@ -55,11 +56,11 @@ public class QnaVO {
 	public void setCsView(int csView) {
 		this.csView = csView;
 	}
-	public String getCategory() {
-		return category;
+	public String getCsCategory() {
+		return csCategory;
 	}
-	public void setCategory(String category) {
-		this.category = category;
+	public void setCsCategory(String csCategory) {
+		this.csCategory = csCategory;
 	}
 	public int getCsSecret() {
 		return csSecret;
@@ -73,12 +74,20 @@ public class QnaVO {
 	public void setCsReply(String csReply) {
 		this.csReply = csReply;
 	}
+
+	public int getTemporary() {
+		return temporary;
+	}
+	public void setTemporary(int temporary) {
+		this.temporary = temporary;
+	}
 	@Override
 	public String toString() {
-		return "customerServiceVO [csNo=" + csNo + ", csTitle=" + csTitle + ", csContent=" + csContent + ", csWriter="
-				+ csWriter + ", csDate=" + csDate + ", csView=" + csView + ", category=" + category + ", csSecret="
-				+ csSecret + ", csReply=" + csReply + "]";
+		return "QnaVO [csId=" + csId + ", csNo=" + csNo + ", csTitle=" + csTitle + ", csContent=" + csContent
+				+ ", csWriter=" + csWriter + ", csDate=" + csDate + ", csView=" + csView + ", csCategory=" + csCategory
+				+ ", csSecret=" + csSecret + ", csReply=" + csReply + ", temporary=" + temporary + "]";
 	}
+	
 	
 	
 }

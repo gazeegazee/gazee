@@ -14,10 +14,10 @@ public class QnaController {
 	@Autowired
 	QnaDAO dao;
 	
-	@RequestMapping("insert")
-	public void insert(QnaVO bag) {
-		dao.insert(bag);
-
+	@RequestMapping("customerService/qna/qnaWrite")
+	public void qnaWrite(QnaVO bag) {
+		System.out.println(bag);
+		dao.qnaRegister(bag);
 	}
 	
 	@RequestMapping("customerService/qna/qnaList")
@@ -81,8 +81,17 @@ public class QnaController {
 		
 	}
 	
+	@RequestMapping("customerService/qna/qnaOne")
+	public void one(int id, Model model) {
+		QnaVO bag = dao.one(id);
+		model.addAttribute("bag",bag);
+	}
+	
+	
 	@RequestMapping("customerService/qna/goToQnaWrite")
 	public String goToQnaWrite() {
 		return "customerService/qna/qnaWrite";
 	}
+	
+	
 }

@@ -13,8 +13,9 @@ public class QnaDAO {
 	@Autowired
 	SqlSessionTemplate my;
 	
-	public void insert(QnaVO bag) {
-		my.insert("qna.create", bag);
+	public int qnaRegister(QnaVO bag) {
+		int result = my.insert("qna.register", bag);
+		return result;
 	}
 	
 	public void delete(QnaVO bag) {

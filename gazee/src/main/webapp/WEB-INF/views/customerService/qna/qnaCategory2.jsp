@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<link href="../../resources/css/style.css" rel="stylesheet" />
+<link href="../../resources/css/style2.css" rel="stylesheet" />
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -48,8 +48,8 @@
 	</tr>
 	<c:forEach items="${category}" var="bag">
 		<tr>
-			<td class="down">${bag.csId}</td>
-			<td class="down"><a href="qnaOne?no=${bag.csNo}">${bag.csTitle}</a></td>
+			<td class="down">${bag.csNo}</td>
+			<td class="down"><a href="qnaOne?id=${bag.csId}">${bag.csTitle}</a></td>
 			<td class="down">${bag.csWriter}</td>
 			<td class="down">${bag.csDate}</td>
 			<td class="down">${bag.csView}</td>
