@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%int productId = Integer.parseInt(request.getParameter("productId"));%>
+<%int productId = Integer.parseInt(request.getParameter("productId").trim());%>
+<%String memberId = request.getParameter("memberId");%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,7 +17,8 @@
 		$.ajax({
 			url : "detail",
 			data : {
-				productId : <%=productId%>
+				productId : <%=productId%>,
+				memberId : "<%= memberId %>"
 			},
 			success : function(res) {
 				$('#product_table').append(res)
@@ -77,7 +79,10 @@
 		</div>
 	</div>
 	<div id="content">
+	<%-- <%=productId%>
+		<%=memberId%> --%>
 		<div id="product_table">
+		
 
 		</div>
 	</div>
