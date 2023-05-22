@@ -36,4 +36,15 @@ public class ProductDAO {
 		
 		return timestamp;
 	}
+  	public ProductVO productDetail(int productId) {
+		ProductVO bag = my.selectOne("product.productDetail",productId);
+		return bag;
+	}
+	
+	public List<ProductVO> list() {
+		List<ProductVO> list = my.selectList("product.all");
+		//row하나당 어떤 vo에 넣을지만 지정하면 my.selectList()를 호출한 경우에는 myBatis가 list vo가 잔뜩 들어간 List로 만들어준다.
+		System.out.println(list.size());
+		return list;
+	}
 }

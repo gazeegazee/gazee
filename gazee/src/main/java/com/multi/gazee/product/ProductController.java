@@ -21,4 +21,21 @@ public class ProductController {
 			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 		}
 	}
+  
+  	@RequestMapping("product/detail")
+	public void productDetail(Model model,int productId) {
+		ProductVO bag = dao.productDetail(productId);
+		System.out.println(bag);
+		model.addAttribute("bag", bag);
+		ProductImageVO bag2 = dao2.productImage(productId);
+		System.out.println(bag2);
+		model.addAttribute("bag2", bag2);
+		
+	}
+	
+	@RequestMapping("product/list")
+	public void list(Model model) {
+		List<ProductVO> list = dao.list();
+		model.addAttribute("list", list);
+	}
 }

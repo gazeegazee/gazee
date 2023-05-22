@@ -29,6 +29,4 @@ public class ProductImageVO {
 	}
 	public void setProductImageOrder(int productImageOrder) {
 		this.productImageOrder = productImageOrder;
-	}
-	
 }

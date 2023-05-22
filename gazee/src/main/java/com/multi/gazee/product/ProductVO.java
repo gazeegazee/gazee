@@ -17,7 +17,7 @@ public class ProductVO {
 	int productViews;
 	int temporary;
 	Timestamp savedTime;
-	
+
 	public int getProductId() {
 		return productId;
 	}
