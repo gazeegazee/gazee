@@ -17,6 +17,7 @@
 	font-size: medium;
 }
 .each-row {
+	text-align:left;
 	height:100px;
 }
 .content-row {
