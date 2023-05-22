@@ -13,7 +13,6 @@ public class MemberVO {
 	private String name;
 	private String tel;
 	private String nickname;
-	private String address;
 	private String email;
 	private int userLevel;
 	private String account;
@@ -60,17 +59,12 @@ public class MemberVO {
 	public void setTel(String tel) {
 		this.tel = tel;
 	}
+
 	public String getNickname() {
 		return nickname;
 	}
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
-	}
-	public String getAddress() {
-		return address;
-	}
-	public void setAddress(String address) {
-		this.address = address;
 	}
 	public String getEmail() {
 		return email;
@@ -120,22 +114,19 @@ public class MemberVO {
 	public String getProfileImg() {
 		return profileImg;
 	}
-	
-	@Override
-	public String toString() {
-		return "MemberVO [no=" + no + ", id=" + id + ", pw=" + pw + ", name=" + name + ", tel=" + tel + ", nickname="
-				+ nickname + ", address=" + address + ", email=" + email + ", userLevel=" + userLevel + ", account="
-				+ account + ", bank=" + bank + ", status=" + status + ", birth=" + birth + ", gender=" + gender
-				+ ", joinDate=" + joinDate + ", profileImg=" + profileImg + "]";
-	}
 	public void setProfileImg(String profileImg) {
 		this.profileImg = profileImg;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "MemberVO [no=" + no + ", id=" + id + ", pw=" + pw + ", name=" + name + ", tel=" + tel + ", nickname="
+				+ nickname + ", email=" + email + ", userLevel=" + userLevel + ", account=" + account + ", bank=" + bank
+				+ ", status=" + status + ", birth=" + birth + ", gender=" + gender + ", joinDate=" + joinDate
+				+ ", profileImg=" + profileImg + "]";
+	}
 	
 
-	
 
 
 	
