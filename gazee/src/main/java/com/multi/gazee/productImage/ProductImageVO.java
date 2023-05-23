@@ -5,6 +5,7 @@ public class ProductImageVO {
 	int productId;
 	String productImageName;
 	int productImageOrder;
+	
 	public int getProductImageId() {
 		return productImageId;
 	}
@@ -29,11 +30,5 @@ public class ProductImageVO {
 	public void setProductImageOrder(int productImageOrder) {
 		this.productImageOrder = productImageOrder;
 	}
-	@Override
-	public String toString() {
-		return "ProductImageVO [productImageId=" + productImageId + ", productId=" + productId + ", productImageName="
-				+ productImageName + ", productImageOrder=" + productImageOrder + "]";
-	}
-
 	
 }

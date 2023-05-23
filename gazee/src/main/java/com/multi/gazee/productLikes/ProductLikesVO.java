@@ -4,6 +4,7 @@ public class ProductLikesVO {
 	int likeId;
 	int productId;
 	String memberId;
+	
 	public int getLikeId() {
 		return likeId;
 	}
@@ -22,10 +23,4 @@ public class ProductLikesVO {
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
-	@Override
-	public String toString() {
-		return "ProductLikesDAO [likeId=" + likeId + ", productId=" + productId + ", memberId=" + memberId + "]";
-	}
-	
-	
 }

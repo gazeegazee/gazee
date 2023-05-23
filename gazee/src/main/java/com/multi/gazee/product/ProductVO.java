@@ -1,5 +1,7 @@
 package com.multi.gazee.product;
 
+import java.sql.Timestamp;
+
 public class ProductVO {
 
 	int productId;
@@ -8,13 +10,14 @@ public class ProductVO {
 	String productName;
 	String productContent;
 	int price;
-	int dealDelivery;
 	int dealDirect;
-	float directAddressx;
-	float directAddressy;
+	int dealDelivery;
+	String directAddressx;
+	String directAddressy;
 	int productViews;
 	int temporary;
-	String savedTime;
+	Timestamp savedTime;
+	
 	public int getProductId() {
 		return productId;
 	}
@@ -51,28 +54,28 @@ public class ProductVO {
 	public void setPrice(int price) {
 		this.price = price;
 	}
-	public int getDealDelivery() {
-		return dealDelivery;
-	}
-	public void setDealDelivery(int dealDelivery) {
-		this.dealDelivery = dealDelivery;
-	}
 	public int getDealDirect() {
 		return dealDirect;
 	}
 	public void setDealDirect(int dealDirect) {
 		this.dealDirect = dealDirect;
 	}
-	public float getDirectAddressx() {
+	public int getDealDelivery() {
+		return dealDelivery;
+	}
+	public void setDealDelivery(int dealDelivery) {
+		this.dealDelivery = dealDelivery;
+	}
+	public String getDirectAddressx() {
 		return directAddressx;
 	}
-	public void setDirectAddressx(float directAddressx) {
+	public void setDirectAddressx(String directAddressx) {
 		this.directAddressx = directAddressx;
 	}
-	public float getDirectAddressy() {
+	public String getDirectAddressy() {
 		return directAddressy;
 	}
-	public void setDirectAddressy(float directAddressy) {
+	public void setDirectAddressy(String directAddressy) {
 		this.directAddressy = directAddressy;
 	}
 	public int getProductViews() {
@@ -87,23 +90,10 @@ public class ProductVO {
 	public void setTemporary(int temporary) {
 		this.temporary = temporary;
 	}
-	public String getSavedTime() {
+	public Timestamp getSavedTime() {
 		return savedTime;
 	}
-	public void setSavedTime(String savedTime) {
+	public void setSavedTime(Timestamp savedTime) {
 		this.savedTime = savedTime;
 	}
-	@Override
-	public String toString() {
-		return "ProductVO [productId=" + productId + ", memberId=" + memberId + ", category=" + category
-				+ ", productName=" + productName + ", productContent=" + productContent + ", price=" + price
-				+ ", dealDelivery=" + dealDelivery + ", dealDirect=" + dealDirect + ", directAddressx=" + directAddressx
-				+ ", directAddressy=" + directAddressy + ", productViews=" + productViews + ", temporary=" + temporary
-				+ ", savedTime=" + savedTime + "]";
-	}
-	
-	
-	
-	
-	
 }
