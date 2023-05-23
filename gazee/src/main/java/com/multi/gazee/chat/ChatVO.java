@@ -9,7 +9,8 @@ public class ChatVO {
 	private int productId;
 	private String dealType;
 	private Timestamp dealDirectDate;
-	private Timestamp lastMessageTime;
+	private Timestamp lastMessageDate;
+
 	public int getRoomId() {
 		return roomId;
 	}
@@ -34,28 +35,30 @@ public class ChatVO {
 	public void setProductId(int productId) {
 		this.productId = productId;
 	}
+	
 	public String getDealType() {
 		return dealType;
 	}
 	public void setDealType(String dealType) {
 		this.dealType = dealType;
 	}
+	
 	public Timestamp getDealDirectDate() {
 		return dealDirectDate;
 	}
 	public void setDealDirectDate(Timestamp dealDirectDate) {
 		this.dealDirectDate = dealDirectDate;
 	}
-	public Timestamp getLastMessageTime() {
-		return lastMessageTime;
+	public Timestamp getLastMessageDate() {
+		return lastMessageDate;
 	}
-	public void setLastMessageTime(Timestamp lastMessageTime) {
-		this.lastMessageTime = lastMessageTime;
+	public void setLastMessageDate(Timestamp lastMessageDate) {
+		this.lastMessageDate = lastMessageDate;
 	}
 	@Override
 	public String toString() {
 		return "ChatVO [roomId=" + roomId + ", sellerId=" + sellerId + ", buyerId=" + buyerId + ", productId="
-				+ productId + ", dealType=" + dealType + ", dealDirectDate=" + dealDirectDate + ", lastMessageTime="
-				+ lastMessageTime + "]";
+				+ productId + ", dealType=" + dealType + ", dealDirectDate=" + dealDirectDate + ", lastMessageDate="
+				+ lastMessageDate + "]";
 	}
 }
