@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="admin">
+    <select id="readAdmin" resultType="MemberVO">
+        SELECT *
+        FROM member
+        WHERE user_level = 0
+    </select>
+
+    <!-- 비밀번호 변경 -->
+    <update id="updatePw">
+        UPDATE member
+        SET pw = #{pw}
+        WHERE email = #{email}
+    </update>
+
+    <select id="listSet" resultType="SetVO">
+        SELECT *
+        FROM tb_set
+    </select>
+
+    <select id="listOrder" resultType="OrderVO">
+        SELECT *
+        FROM tb_order
+    </select>
+
+    <select id="listOrderNeedToSet" resultType="OrderVO">
+        SELECT *
+        FROM tb_order
+        WHERE seller_confirm = 1
+          AND buyer_confirm = 1
+    </select>
+
+    <select id="listOrderFinished" resultType="OrderVO">
+        SELECT *
+        FROM tb_order
+        WHERE set_status = 1
+    </select>
+
+    <select id="sumTotalTrading" resultType="int">
+        SELECT SUM(p.price) AS total_trading
+        FROM tb_order o JOIN product p ON o.product_id = p.product_id
+        WHERE o.set_status = 1;
+    </select>
+
+    <select id="listProductToday" resultType="ProductVO">
+        SELECT *
+        FROM product WHERE DATE(saved_time) = CURDATE();
+    </select>
+
+    <select id="productOneById" parameterType="int" resultType="ProductVO">
+        SELECT *
+        FROM product
+        WHERE product_id = #{productId}
+    </select>
+
+    <select id="sumCommission" resultType="int">
+        SELECT SUM(commission) AS total_commission
+        FROM withdraw WHERE withdraw_status = 1
+    </select>
+
+    <!-- 이번 주 새로 가입한 멤버 -->
+    <select id="newMemberThisWeek" resultType="MemberVO">
+        SELECT *
+        FROM member
+        WHERE join_date BETWEEN DATE_ADD(NOW(), INTERVAL -1 WEEK ) AND NOW()
+    </select>
+
+    <!-- 최근 한달 간 가입한 멤버 -->
+    <select id="memberOfPastThirtyDays" resultType="MemberVO">
+        SELECT *
+        FROM member
+        WHERE join_date > DATE_SUB(NOW(), INTERVAL 30 DAY)
+    </select>
+
+    <select id="listTransaction" resultType="TransactionHistoryVO">
+        SELECT *
+        FROM transaction_history
+    </select>
+
+    <select id="listWithdraw" resultType="WithdrawVO">
+        SELECT *
+        FROM withdraw
+    </select>
+
+    <select id="listCharge" resultType="ChargeVO">
+        SELECT *
+        FROM charge
+    </select>
+
+    <select id="listWithdrawNeedConfirm" resultType="WithdrawVO">
+        SELECT *
+        FROM withdraw where withdraw_status = 0
+    </select>
+
+    <select id="listWithdrawComplete" resultType="WithdrawVO">
+        SELECT *
+        FROM withdraw where withdraw_status = 1
+    </select>
+
+    <select id="oneWithdrawById" parameterType="String" resultType="WithdrawVO">
+        SELECT *
+        FROM withdraw
+        WHERE transaction_id = #{id}
+    </select>
+
+    <select id="listBankAccount" parameterType="String" resultType="MemberVO">
+        SELECT bank, account FROM member WHERE id = #{id}
+    </select>
+
+    <select id="suspended" resultType="MemberVO">
+        SELECT * FROM member WHERE status = '정지'
+    </select>
+
+    <select id="oneById" parameterType="String" resultType="MemberVO">
+        SELECT * FROM member WHERE id = #{id}
+    </select>
+
+    <select id="balance" parameterType="String" resultType="int">
+        SELECT balance
+        FROM transaction_history
+        WHERE member_id = #{id}
+        ORDER BY no DESC
+            LIMIT 1;
+    </select>
+
+</mapper>
