@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="product">
+	<select id="best" resultType="productVO">
+		select *
+		from product
+		where temporary = 1
+		order by product_views desc
+		limit 5
+	</select>
+
+	<select id="userBest" resultType="ProductVO" parameterType="String">
+		select * from product 
+		where category = (select category from 
+		(select category , count(*) as category_count
+		from recently_viewed rv, product p
+		where rv.member_id = #{memberId} and rv.product_id = p.product_id
+		group by category) as result
+		order by category_count desc
+		limit 1) and temporary = 1
+		order by product_id desc
+		limit 5
+	</select>
+	
+	<select id="wekaBest" resultType="productVO" parameterType="String">
+		select *
+		from product
+		where category = #{category} and temporary = 1
+		order by product_id desc
+		limit 5
+	</select>
+	
+	<select id="searchAll" resultType="productVO"  parameterType="Map">
+		select * from (
+		select ROW_NUMBER() over(order by product_id desc) as product_no, p.*
+		from product p
+		where product_name like concat('%', #{search}, '%') and temporary = 1) product2
+		where product2.product_no between #{start} and #{end}
+	</select>
+
+	<select id="searchAllOnSale" resultType="productVO"  parameterType="Map">
+		select * from (
+		select ROW_NUMBER() over(order by product_id desc) as product_no, p.*
+		from product p
+		where product_name like concat('%', #{search}, '%') and temporary = 1 and product_id not in 
+		(select product_id 
+		from tb_order to2 
+		where complete_status = 1)) product2
+		where product2.product_no between #{start} and #{end}
+	</select>
+
+	<select id="categoryAll" resultType="productVO"  parameterType="Map">
+		select * from (
+		select ROW_NUMBER() over(order by product_id desc) as product_no, p.*
+		from product p
+		where category = #{category} and temporary = 1) product2
+		where product2.product_no between #{start} and #{end}
+	</select>
+
+	<select id="categoryAllOnSale" resultType="productVO"  parameterType="Map">
+		select * from (
+		select ROW_NUMBER() over(order by product_id desc) as product_no, p.*
+		from product p
+		where category = #{category} and temporary = 1 and product_id not in 
+		(select product_id 
+		from tb_order to2 
+		where complete_status = 1)) product2
+		where product2.product_no between #{start} and #{end}
+	</select>
+	
+	<select id="countSearch" resultType="Integer" parameterType="String">
+		select count(*) from product
+		where product_name like concat('%', #{search}, '%') and temporary = 1
+	</select>
+
+	<select id="countSearchOnSale" resultType="Integer" parameterType="String">
+		select count(*) from product
+		where product_name like concat('%', #{search}, '%') and temporary = 1 and product_id not in 
+		(select product_id 
+		from tb_order to2 
+		where complete_status = 1)
+	</select>
+
+	<select id="countCategory" resultType="Integer" parameterType="String">
+		select count(*) from product
+		where category = #{category} and temporary = 1
+	</select>
+
+	<select id="countCategoryOnSale" resultType="Integer" parameterType="String">
+		select count(*) from product
+		where category = #{category} and temporary = 1 and product_id not in 
+		(select product_id 
+		from tb_order to2 
+		where complete_status = 1)
+	</select>
+
+	<update id="viewsCount" parameterType="Integer">
+		update product 
+		set product_views = product_views + 1
+		where product_id = #{productId}
+	</update>
+	
+	
+	
+	<insert id="register" parameterType="productVO"  useGeneratedKeys="true" keyProperty="productId">
+		INSERT INTO product
+		(member_id, category, product_name, product_content, price, deal_delivery, deal_direct, `direct_addressx`, `direct_addressy`, product_views, `temporary`, saved_time)
+		VALUES(#{memberId}, #{category}, #{productName}, #{productContent}, #{price}, #{dealDelivery}, #{dealDirect}, #{directAddressx}, #{directAddressy}, 0, #{temporary}, #{savedTime});
+	</insert>
+	
+	<select id="productDetail" resultType="ProductVO" parameterType="Integer">
+	  select * from product where product_id = #{productId}
+	</select>
+	<select id="all" resultType="ProductVO">
+	  select * from product	
+	</select>
+
+    <!-- Paged ALL -->
+    <select id="pagedAll" resultType="productVO" parameterType="pageVO">
+        SELECT *
+        FROM (SELECT ROW_NUMBER() over(ORDER BY product_id) AS product_id, saved_time, product_name, member_id, price, product_views
+              FROM product p) p2
+        WHERE p2.product_id BETWEEN #{start} AND #{end}
+    </select>
+
+    <!-- 등록 된 상품 갯수 카운트 -->
+    <select id="count" resultType="Integer">
+        SELECT count(*) FROM product
+    </select>
+
+    <!-- 오늘 등록 된 상품 Read -->
+    <select id="listProductToday" resultType="productVO">
+        SELECT *
+        FROM product WHERE DATE(saved_time) = CURDATE();
+    </select>
+
+    <!-- Member ID로 상품 정보 Read -->
+    <select id="productOneById" parameterType="String" resultType="productVO">
+        SELECT *
+        FROM product
+        WHERE member_id = #{id}
+    </select>
+
+    <!-- 검색 기능 -->
+    <select id="search" parameterType="java.util.Map" resultType="productVO">
+        SELECT *
+        FROM product
+        WHERE ${searchType} = #{searchIndex}
+    </select>
+
+    <!-- Order의 order_id로 해당 주문의 판매상품 가격 Read -->
+    <select id="priceByOrderNo" parameterType="int" resultType="int">
+        SELECT price
+        FROM tb_order o JOIN product p ON o.product_id = p.product_id
+        WHERE p.product_id = #{productId};
+    </select>
+    
+    <delete id="productDelete" parameterType="productVO">
+		delete from product where member_id = #{memberId} and product_id = #{productId}
+	</delete>
+	
+	<select id="checkTemporaryProduct" resultType="productVO" parameterType="productVO">
+		select * from product where member_id = #{memberId} and `temporary` = 0
+	</select>
+	
+	<update id="productUpdate" parameterType="productVO">
+		update product set category=#{category}, product_name=#{productName}, product_content=#{productContent}, price=#{price}, deal_direct=#{dealDirect}, `direct_addressx`=#{directAddressx}, `direct_addressy`=#{directAddressy}, deal_delivery=#{dealDelivery}, product_views=0, `saved_time`=#{savedTime},`temporary` = #{temporary} where member_id = #{memberId} and product_id=#{productId}
+	</update>
+	
+	<update id="sellTimeUpdate" parameterType="Integer">
+		update product set sell_time = current_time where product_id = #{productId}
+	</update>
+	
+	<update id="sellTimeDelete" parameterType="Integer">
+		update product set sell_time = null where product_id = #{productId}
+	</update>
+	
+	<select id="productOne" parameterType="Integer" resultType="productVO">
+		select * from product where product_id = #{productId}
+	</select>
+	<select id="checkSeller" parameterType="Integer" resultType="String">
+		select member_id 
+		from product p 
+		where product_id = #{productId}
+	</select>
+	
+</mapper>
